@@ -2,6 +2,7 @@ import re
 import fileinput
 import subprocess
 from featurelayers.__version__ import __version__
+import git
 from rich import print
 
 
@@ -55,3 +56,21 @@ commit_message_with_version = f"{commit_message} (Version {new_version})"
 
 # Thực hiện add, commit và push với commit_message_with_version
 git_add_commit_push(commit_message_with_version)
+
+# Cập nhật nội dung trong README với phiên bản mới nhất
+repo = git.Repo()
+readme_file = 'README.md'
+readme = repo.working_dir / readme_file
+
+# Đọc nội dung README
+with open(readme, 'r') as f:
+    content = f.read()
+
+# Tìm và thay thế phiên bản cũ trong README bằng phiên bản mới
+new_content = re.sub(r'__version__ = ".*"', f'__version__ = "{new_version}"', content)
+
+# Ghi nội dung mới vào README
+with open(readme, 'w') as f:
+    f.write(new_content)
+
+print("[bold green]README updated with the latest version![/bold green]")
