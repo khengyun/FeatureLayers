@@ -1,2 +1,4 @@
 
-import featurelayers as fl
+from featurelayers import test
+
+test()

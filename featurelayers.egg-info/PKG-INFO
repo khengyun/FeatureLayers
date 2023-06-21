@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: featurelayers
-Version: 1.0.2
-Summary: FeatureLayers Package
+Version: 0.1.dev2+g7ea533b.d20230621
+Summary: featurelayers Package
 Author: khengyun
 Author-email: khaangnguyeen@email.com
 Classifier: Development Status :: 3 - Alpha

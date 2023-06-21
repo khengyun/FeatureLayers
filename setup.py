@@ -1,13 +1,11 @@
-import setuptools
 from setuptools import setup, find_packages
 
 setup(
     name='featurelayers',
-    version='1.0.2',
-    description='FeatureLayers Package',
+    description='featurelayers Package',
     author='khengyun',
     author_email='khaangnguyeen@email.com',
-    packages=find_packages(),
+    packages=find_packages(include=['featurelayers', 'featurelayers.layers']),
     install_requires=[
         'numpy',
         'scipy',
@@ -15,12 +13,13 @@ setup(
         'keras',
         'scipy',
     ],
-    classifiers= [
-            "Development Status :: 3 - Alpha",
-            "Intended Audience :: Education",
-            "Programming Language :: Python :: 3",
-            "Operating System :: MacOS :: MacOS X",
-            "Operating System :: Microsoft :: Windows",
-        ]
-
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Education",
+        "Programming Language :: Python :: 3",
+        "Operating System :: MacOS :: MacOS X",
+        "Operating System :: Microsoft :: Windows",
+    ],
+    use_scm_version=True,
+    setup_requires=['setuptools_scm'],
 )

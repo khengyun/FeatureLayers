@@ -1,6 +1,6 @@
 import shutil
 
-folder_path = ["dist", "FeatureLayers.egg-info"]  # Đường dẫn đến thư mục dist
+folder_path = ["dist", "featurelayers.egg-info"]  # Đường dẫn đến thư mục dist
 
 for folder in folder_path:
     try:
