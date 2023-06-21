@@ -3,8 +3,6 @@ from featurelayers.__version__ import __version__
 
 def local_scheme(version):
     return ""
-
-
 setup(
     name='featurelayers',
     description='featurelayers Package',
