@@ -59,18 +59,28 @@ jobs:
         fi
 
         echo "::set-output name=version::$VERSION"
-     
+        
     - name: Create a Release
-      id: create_release
-      uses: action-pack/github-release@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: svenstaro/upload-release-action@v2
       with:
-        tag: v${{ steps.deploy.outputs.version }}
-        title: Release ${{ steps.deploy.outputs.version }}
+        artifactErrorsFailBuild: false
+        artifacts: ${{ steps.deploy.outputs.version }}/dist/*
         body: |
           v${{ steps.deploy.outputs.version }}
           Download the package from [PyPI](https://pypi.org/project/your-package-name/)
+        draft: false
+        makeLatest: "legacy"
+        name: Release ${{ steps.deploy.outputs.version }}
+        owner: current repo
+        prerelease: false
+        removeArtifacts: false
+        replacesArtifacts: true
+        repo: current repo
+        skipIfReleaseExists: false
+        tag: v${{ steps.deploy.outputs.version }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+      
   
     - name: Attach PyPI release link
       uses: svenstaro/upload-release-action@v2
