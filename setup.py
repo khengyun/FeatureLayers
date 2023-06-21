@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='featurelayers',
-    version="1.0.8",
+    version="1.0.9",
     description='featurelayers Package',
     author='khengyun',
     author_email='khaangnguyeen@email.com',
