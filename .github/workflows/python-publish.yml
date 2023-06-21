@@ -30,7 +30,7 @@ jobs:
 
     - name: Install setuptools_scm
       run: python -m pip install setuptools_scm
-    
+
     - name: Build and publish package
       env:
         PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
@@ -59,17 +59,19 @@ jobs:
         fi
 
         echo "::set-output name=version::$VERSION"
-
-    - name: Create new release
-      uses: actions/create-release@v1
+     
+    - name: Create a Release
+      id: create_release
+      uses: action-pack/github-release@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v${{ steps.deploy.outputs.version }}
-        release_name: Release ${{ steps.deploy.outputs.version }}
-        draft: false
-        prerelease: false
-
+        tag: v${{ steps.deploy.outputs.version }}
+        title: Release ${{ steps.deploy.outputs.version }}
+        body: |
+          v${{ steps.deploy.outputs.version }}
+          Download the package from [PyPI](https://pypi.org/project/your-package-name/)
+  
     - name: Attach PyPI release link
       uses: svenstaro/upload-release-action@v2
       with:
