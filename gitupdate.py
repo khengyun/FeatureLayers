@@ -2,6 +2,7 @@ import re
 import fileinput
 import subprocess
 from featurelayers.__version__ import __version__
+from rich import print
 
 
 def git_add_commit_push(commit_message):
@@ -15,9 +16,9 @@ def git_add_commit_push(commit_message):
         # Push to remote repository
         subprocess.run(["git", "push"], check=True)
 
-        print("Push successful!")
+        print("[bold green]Push successful![/bold green]")
     except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
+        print(f"[bold red]Error: {e}[/bold red]")
 
 
 # Đọc giá trị version từ module featurelayers
