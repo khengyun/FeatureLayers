@@ -37,7 +37,7 @@ jobs:
 
     - name: Update version
       run: |
-        CURRENT_VERSION=$(python -c "import setuptools_scm.version; print(setuptools_scm.version.get_version())")
+        CURRENT_VERSION=$(python -c "import setuptools_scm.tag_to_version; print(setuptools_scm.version.get_version())")
         NEW_VERSION="$CURRENT_VERSION"
         while twine check --config-file ~/.pypirc dist/* | grep -q "File already exists"; do
           NEW_VERSION=$(python -c "parts = '$NEW_VERSION'.split('.'); parts[-1] = str(int(parts[-1]) + 1); print('.'.join(parts))")
