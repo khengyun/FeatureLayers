@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='featurelayers',
-    version='1.0.0',
+    version='1.0.2',
     description='FeatureLayers Package',
     author='khengyun',
     author_email='khaangnguyeen@email.com',
@@ -14,4 +14,13 @@ setup(
         'tensorflow',
         'keras',
         'scipy',
-    ])
+    ],
+    classifiers= [
+            "Development Status :: 3 - Alpha",
+            "Intended Audience :: Education",
+            "Programming Language :: Python :: 3",
+            "Operating System :: MacOS :: MacOS X",
+            "Operating System :: Microsoft :: Windows",
+        ]
+
+)
