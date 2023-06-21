@@ -46,4 +46,4 @@ jobs:
         echo "repository: https://upload.pypi.org/legacy/" >> ~/.pypirc
         echo "username: __token__" >> ~/.pypirc
         echo "password: $PYPI_API_TOKEN" >> ~/.pypirc
-        twine upload --config-file ~/.pypirc dist/*
+        twine upload --config-file ~/.pypirc dist/* --verbose
