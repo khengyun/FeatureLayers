@@ -7,13 +7,13 @@ from rich import print
 from pathlib import Path
 
 
-def git_add_commit_push(commit_message):
+def git_add_commit_push(message):
     try:
         # Add all files to staging area
         subprocess.run(["git", "add", "."], check=True)
 
         # Commit changes
-        subprocess.run(["git", "commit", "-m", commit_message], check=True)
+        subprocess.run(["git", "commit", "-m", message], check=True)
 
         # Push to remote repository
         subprocess.run(["git", "push"], check=True)
