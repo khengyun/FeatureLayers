@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
-
+from featurelayers.__version__ import __version__
 
 setup(
     name='featurelayers',
-    version="1.0.9",
+    version=__version__,
     description='featurelayers Package',
     author='khengyun',
     author_email='khaangnguyeen@email.com',

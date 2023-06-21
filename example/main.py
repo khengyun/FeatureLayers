@@ -1,4 +1,4 @@
 
-from featurelayers import test
-print("test")
-test()
+from featurelayers.layers.LBC import LBC
+print("test: ")
+example()

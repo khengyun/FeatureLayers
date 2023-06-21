@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="run" type="CompoundRunConfigurationType">
-    <toRun name="beforebuild" type="PythonConfigurationType" />
-    <toRun name="build" type="PythonConfigurationType" />
-    <toRun name="upload" type="ShConfigurationType" />
-    <method v="2" />
-  </configuration>
-</component>
