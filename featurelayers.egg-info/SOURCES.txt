@@ -1,0 +1,8 @@
+README.md
+setup.py
+FeatureLayers/__init__.py
+featurelayers.egg-info/PKG-INFO
+featurelayers.egg-info/SOURCES.txt
+featurelayers.egg-info/dependency_links.txt
+featurelayers.egg-info/requires.txt
+featurelayers.egg-info/top_level.txt
