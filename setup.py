@@ -1,8 +1,4 @@
 from setuptools import setup, find_packages
-from featurelayers.__version__ import __version__
-
-def local_scheme(version):
-    return ""
 
 
 setup(
@@ -15,8 +11,9 @@ setup(
         'numpy',
         'scipy',
         'tensorflow',
-        'keras',
+        'keras',  # Thêm thư viện keras vào danh sách các gói yêu cầu
         'scipy',
+        'git',  # Thêm git vào danh sách các gói yêu cầu
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -25,6 +22,9 @@ setup(
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
     ],
-    use_scm_version={"local_scheme": local_scheme},
+    use_scm_version={
+        'version_scheme': 'guess-next-dev',
+        'local_scheme': 'no-local-version',
+    },
     setup_requires=['setuptools_scm'],
 )
