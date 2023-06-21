@@ -21,8 +21,8 @@ setup(
         "Operating System :: Microsoft :: Windows",
     ],
     use_scm_version={
-        'version_scheme': 'post-release',
-        'local_scheme': 'post-release',
+        'version_scheme': 'guess-next-dev',
+        'local_scheme': 'no-local-version',
     },
     setup_requires=['setuptools_scm'],
 )
