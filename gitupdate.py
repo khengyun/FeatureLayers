@@ -53,7 +53,7 @@ with fileinput.FileInput('./featurelayers/__version__.py', inplace=True) as file
 commit_message = input("Enter Commit Content: ")
 
 # Gắn giá trị version vào nội dung commit
-commit_message_with_version = f"{commit_message} (Version {new_version})"
+commit_message_with_version = f"{commit_message} (Version {new_version_str})"
 
 # Thực hiện add, commit và push với commit_message_with_version
 git_add_commit_push(commit_message_with_version)
@@ -70,10 +70,10 @@ with open(readme, 'r') as f:
 # Kiểm tra sự tồn tại của __version__
 if '__version__' not in content:
     # Thêm __version__ vào nội dung README
-    new_content = content + f'\n__version__ = "{new_version}"\n'
+    new_content = content + f'\n__version__ = "{new_version_str}"\n'
 else:
     # Tìm và thay thế phiên bản cũ trong README bằng phiên bản mới
-    new_content = re.sub(r'__version__ = ".*"', f'__version__ = "{new_version}"', content)
+    new_content = re.sub(r'__version__ = ".*"', f'__version__ = "{new_version_str}"', content)
 
 # Ghi nội dung mới vào README
 with open(readme, 'w') as f:
