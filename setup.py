@@ -1,9 +1,8 @@
 from setuptools import setup, find_packages
-from setuptools_scm import version
 
 
 def local_scheme(version):
-    return version.get_local_node_and_date().replace("+", "")
+    return ""
 
 
 setup(
