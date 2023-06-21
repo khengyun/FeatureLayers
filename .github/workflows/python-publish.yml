@@ -57,3 +57,24 @@ jobs:
         echo "username: __token__" >> ~/.pypirc
         echo "password: $PYPI_API_TOKEN" >> ~/.pypirc
         twine upload --config-file ~/.pypirc dist/* --verbose
+    - name: Update version
+      run: |
+        CURRENT_VERSION=$(python -c "import re; version = re.search(r'^version\s*=\s*[\"']([^\"']+)[\"']', open('setup.py').read(), re.MULTILINE); print(version.group(1) if version else '')")
+        NEW_VERSION="$CURRENT_VERSION"
+        while twine check --config-file ~/.pypirc dist/* | grep -q "File already exists"; do
+          NEW_VERSION=$(python -c "parts = '$NEW_VERSION'.split('.'); parts[-1] = str(int(parts[-1]) + 1); print('.'.join(parts))")
+          echo "Updating version to $NEW_VERSION"
+          sed -i "s/version=\"$CURRENT_VERSION\"/version=\"$NEW_VERSION\"/" setup.py
+        done
+    - name: Publish package
+      env:
+        PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+      run: |
+        echo "[distutils]" > ~/.pypirc
+        echo "index-servers =" >> ~/.pypirc
+        echo "    pypi" >> ~/.pypirc
+        echo "[pypi]" >> ~/.pypirc
+        echo "repository: https://upload.pypi.org/legacy/" >> ~/.pypirc
+        echo "username: __token__" >> ~/.pypirc
+        echo "password: $PYPI_API_TOKEN" >> ~/.pypirc
+        twine upload --config-file ~/.pypirc dist/* --verbose
