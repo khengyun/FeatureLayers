@@ -55,4 +55,4 @@ jobs:
           python -m build --sdist --wheel
         fi
 
-        twine upload --config-file ~/.pypirc dist/*
+        twine upload --config-file ~/.pypirc dist/* --verbose
