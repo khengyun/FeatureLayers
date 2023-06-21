@@ -14,6 +14,7 @@ setup(
         'tensorflow',
         'keras',
         'scipy',
+        'setuptools_scm',
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",
