@@ -1,4 +1,10 @@
 from setuptools import setup, find_packages
+from setuptools_scm import version
+
+
+def local_scheme(version):
+    return version.get_local_node_and_date().replace("+", "")
+
 
 setup(
     name='featurelayers',
@@ -12,7 +18,6 @@ setup(
         'tensorflow',
         'keras',
         'scipy',
-        'setuptools_scm'
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -21,6 +26,6 @@ setup(
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
     ],
-    use_scm_version=True,
+    use_scm_version={"local_scheme": local_scheme},
     setup_requires=['setuptools_scm'],
 )
