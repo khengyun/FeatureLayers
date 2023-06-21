@@ -7,7 +7,6 @@ def local_scheme(version):
 
 setup(
     name='featurelayers',
-    version=__version__,
     description='featurelayers Package',
     author='khengyun',
     author_email='khaangnguyeen@email.com',
