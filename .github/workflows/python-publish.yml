@@ -37,6 +37,8 @@ jobs:
     - name: Publish package
       env:
         PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        EXISTING_FILE_PATH: ''
+        EXISTING_FILE_NAME: ''
       run: |
         echo "[distutils]" > ~/.pypirc
         echo "index-servers =" >> ~/.pypirc
@@ -48,11 +50,19 @@ jobs:
 
         VERSION=$(python -c "from setuptools_scm import get_version; print(get_version())")
         if twine check --config-file ~/.pypirc dist/* 2>&1 | grep -q "File already exists"; then
-          echo "Package version already exists on PyPI. Increasing version number..."
-          NEW_VERSION=$(python -c "from packaging.version import Version; v = Version('$VERSION'); v = v.bump_patch(); print(v)")
-          echo "New version: $NEW_VERSION"
-          sed -i "s/version=\"$VERSION\"/version=\"$NEW_VERSION\"/g" setup.py
-          python -m build --sdist --wheel
+          echo "Package version already exists on PyPI. Retrieving existing file information..."
+          EXISTING_FILE_PATH=$(twine check --config-file ~/.pypirc dist/* 2>&1 | grep "File already exists" | awk -F "'" '{print $2}')
+          EXISTING_FILE_NAME=$(basename "$EXISTING_FILE_PATH")
+          echo "Existing file name: $EXISTING_FILE_NAME"
+          echo "Existing file path: $EXISTING_FILE_PATH"
+        else
+          twine upload --config-file ~/.pypirc dist/* --verbose
         fi
 
-        twine upload --config-file ~/.pypirc dist/* --verbose
+        echo "::set-env name=EXISTING_FILE_PATH::$EXISTING_FILE_PATH"
+        echo "::set-env name=EXISTING_FILE_NAME::$EXISTING_FILE_NAME"
+
+    - name: Print existing file information
+      run: |
+        echo "Existing file name: $EXISTING_FILE_NAME"
+        echo "Existing file path: $EXISTING_FILE_PATH"
