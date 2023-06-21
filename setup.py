@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-
+from featurelayers.__version__ import __version__
 
 def local_scheme(version):
     return ""
@@ -7,6 +7,7 @@ def local_scheme(version):
 
 setup(
     name='featurelayers',
+    version=__version__,
     description='featurelayers Package',
     author='khengyun',
     author_email='khaangnguyeen@email.com',
