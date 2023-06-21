@@ -65,7 +65,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.deploy.outputs.version }}
+        tag_name: v${{ steps.deploy.outputs.version }}
         release_name: Release ${{ steps.deploy.outputs.version }}
         draft: false
         prerelease: false
@@ -75,5 +75,5 @@ jobs:
       with:
         file: ${{ steps.deploy.outputs.version }}/dist/*
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ steps.deploy.outputs.version }}
+        tag: v${{ steps.deploy.outputs.version }}
         overwrite: false
