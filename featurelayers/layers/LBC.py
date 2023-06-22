@@ -69,12 +69,6 @@ class LBC(Layer):
                           dilation_rate=dilation, activation=activation, use_bias=False, name=name)
 
     def build(self, input_shape):
-        """
-        Build the layer.
-
-        Args:
-            input_shape: Shape of the input tensor.
-        """
         nInputPlane = input_shape[-1]
 
         with K.name_scope(self.LBC.name):
@@ -87,36 +81,12 @@ class LBC(Layer):
         super(LBC, self).build(input_shape)
 
     def call(self, x):
-        """
-        Perform the forward pass of the layer.
-
-        Args:
-            x: Input tensor.
-
-        Returns:
-            Output tensor.
-        """
         return self.LBC(x)
 
     def compute_output_shape(self, input_shape):
-        """
-        Compute the output shape of the layer.
-
-        Args:
-            input_shape: Shape of the input tensor.
-
-        Returns:
-            Output shape.
-        """
         return self.LBC.compute_output_shape(input_shape)
 
     def get_config(self):
-        """
-        Get the configuration of the layer.
-
-        Returns:
-            Configuration dictionary.
-        """
         config = super(LBC, self).get_config()
         config.update({
             'filters': self.nOutputPlane,
