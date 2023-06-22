@@ -11,7 +11,7 @@ pip install featurelayers
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Flatten
-from your_module import LBC
+from featurelayers.layers.LBC import LBC
 
 # Create a simple Keras model
 model = Sequential()
@@ -37,4 +37,4 @@ model.fit(x_train, y_train, epochs=10, batch_size=32)
 
 ```
 
-__version__ = ""1.2.0""
+__version__ = ""1.2.1""
