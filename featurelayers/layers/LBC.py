@@ -41,26 +41,29 @@ def new_weights_non_trainable(h, w, num_input, num_output, sparsity=0.5):
     return weights
 
 
+
+
+
 class LBC(Layer):
     def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,
-                 name="lbc_layer"):
+                 name="khengyun"):
         """
-       Local Binary Convolution (LBC) layer.
+              Local Binary Convolution (LBC) layer.
 
-        Args:
-            - filters: Number of filters (output channels) in the convolution.
-            - kernel_size: Size of the convolution kernel.
-            - stride: Stride of the convolution. Default is 1.
-            - padding: Padding mode for the convolution. Default is 'same'.
-            - activation: Activation function to use. Default is 'relu'.
-            - dilation: Dilation rate for the convolution. Default is 1.
-            - sparsity: Sparsity level of the non-trainable weights. Default is 0.9.
-            - name: Name of the layer. Default is 'lbc_layer'.
+               Args:
+                   - filters: Number of filters (output channels) in the convolution.
+                   - kernel_size: Size of the convolution kernel.
+                   - stride: Stride of the convolution. Default is 1.
+                   - padding: Padding mode for the convolution. Default is 'same'.
+                   - activation: Activation function to use. Default is 'relu'.
+                   - dilation: Dilation rate for the convolution. Default is 1.
+                   - sparsity: Sparsity level of the non-trainable weights. Default is 0.9.
+                   - name: Name of the layer. Default is 'lbc_layer'.
 
-        Returns:
-            The LBC layer.
+               Returns:
+                   The LBC layer.
 
-        """
+               """
         super(LBC, self).__init__()
         self.nOutputPlane = filters
         self.kW = kernel_size
@@ -99,3 +102,4 @@ class LBC(Layer):
             'name': self.LBC.name
         })
         return config
+
