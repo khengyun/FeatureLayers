@@ -9,47 +9,35 @@ from keras import backend as K
 from keras.engine.base_layer import Layer
 
 
-# Non-trainable filters initialized with distribution
-# of Bernoulli as in article and then it's non-trainable
 def new_weights_non_trainable(h, w, num_input, num_output, sparsity=0.5):
     """
-       Create non-trainable weights with a Bernoulli distribution.
+    Create non-trainable weights with a Bernoulli distribution.
 
-       Args:
-           h: Height of the weight matrix.
-           w: Width of the weight matrix.
-           num_input: Number of input channels.
-           num_output: Number of output channels.
-           sparsity: Sparsity level of the weights.
+    Args:
+        h: Height of the weight matrix.
+        w: Width of the weight matrix.
+        num_input: Number of input channels.
+        num_output: Number of output channels.
+        sparsity: Sparsity level of the weights. Default is 0.5.
 
-       Returns:
-           The non-trainable weight matrix.
-
-       """
-
-    # Extract integer values from the tuples
-    h_val, w_val = h
+    Returns:
+        The non-trainable weight matrix.
+    """
+    h_val, w_val = h  # Extract integer values from the tuples
     num_input_val, num_output_val = num_input, num_output
 
-    # Number of elements
-    num_elements = h_val * w_val * num_input_val * num_output_val
-    # Create an array with n number of elements
-    array = np.arange(num_elements)
-    # Random shuffle it
-    np.random.shuffle(array)
-    # Fill with 0
-    weight = np.zeros([num_elements])
-    # Get the number of elements in the array that need to be non-zero
-    ind = int(sparsity * num_elements + 0.5)
-    # Get a piece of it as indexes for the weight matrix
-    index = array[:ind]
+    num_elements = h_val * w_val * num_input_val * num_output_val  # Number of elements
+    array = np.arange(num_elements)  # Create an array with n number of elements
+    np.random.shuffle(array)  # Random shuffle it
+    weight = np.zeros([num_elements])  # Fill with 0
+    ind = int(sparsity * num_elements + 0.5)  # Get the number of elements in the array that need to be non-zero
+    index = array[:ind]  # Get a piece of it as indexes for the weight matrix
 
     for i in index:
         # Fill those indexes with Bernoulli distribution
         # Method rvs = random variates
         weight[i] = bernoulli.rvs(0.5) * 2 - 1
-    # Reshape weights array for the matrix that we need
-    weights = weight.reshape(h_val, w_val, num_input_val, num_output_val)
+    weights = weight.reshape(h_val, w_val, num_input_val, num_output_val)  # Reshape weights array for the matrix that we need
     return weights
 
 
@@ -57,17 +45,21 @@ class LBC(Layer):
     def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,
                  name="lbc_layer"):
         """
-        Local Binary Convolution (LBC) layer.
+       Local Binary Convolution (LBC) layer.
 
         Args:
-            filters: Number of filters (output channels) in the convolution.
-            kernel_size: Size of the convolution kernel.
-            stride: Stride of the convolution. Default is 1.
-            padding: Padding mode for the convolution. Default is 'same'.
-            activation: Activation function to use. Default is 'relu'.
-            dilation: Dilation rate for the convolution. Default is 1.
-            sparsity: Sparsity level of the non-trainable weights. Default is 0.9.
-            name: Name of the layer. Default is 'lbc_layer'.
+            - filters: Number of filters (output channels) in the convolution.
+            - kernel_size: Size of the convolution kernel.
+            - stride: Stride of the convolution. Default is 1.
+            - padding: Padding mode for the convolution. Default is 'same'.
+            - activation: Activation function to use. Default is 'relu'.
+            - dilation: Dilation rate for the convolution. Default is 1.
+            - sparsity: Sparsity level of the non-trainable weights. Default is 0.9.
+            - name: Name of the layer. Default is 'lbc_layer'.
+
+        Returns:
+            The LBC layer.
+
         """
         super(LBC, self).__init__()
         self.nOutputPlane = filters
