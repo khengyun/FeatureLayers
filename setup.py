@@ -23,6 +23,11 @@ setup(
         'tensorflow',
         'keras',
         'scipy',
+        'rich',
+        'matplotlib',
+        'scikit-learn',
+        'graphviz',
+        'pydot',
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",

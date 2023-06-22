@@ -41,9 +41,6 @@ def new_weights_non_trainable(h, w, num_input, num_output, sparsity=0.5):
     return weights
 
 
-
-
-
 class LBC(Layer):
     def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,
                  name="khengyun"):
@@ -61,7 +58,7 @@ class LBC(Layer):
                    - name: Name of the layer. Default is 'lbc_layer'.
 
                Returns:
-                   The LBC layer.
+                   - The LBC layer.
 
                """
         super(LBC, self).__init__()

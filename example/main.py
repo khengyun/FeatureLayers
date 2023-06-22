@@ -80,3 +80,8 @@ def unet(pretrained_weights=None, input_size=(128, 128, 3)):
 
 
 model = unet()
+
+from keras.utils.vis_utils import plot_model
+plot_model(model, to_file='model.png',show_shapes=True, show_layer_names=True)
+model.summary()
+
