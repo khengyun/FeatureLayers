@@ -55,8 +55,7 @@ commit_message = input("Enter Commit Content: ")
 # Gắn giá trị version vào nội dung commit
 commit_message_with_version = f"{commit_message} (Version {new_version_str})"
 
-# Thực hiện add, commit và push với commit_message_with_version
-git_add_commit_push(commit_message_with_version)
+
 
 # Cập nhật nội dung trong README với phiên bản mới nhất
 repo = git.Repo()
@@ -78,5 +77,6 @@ else:
 # Ghi nội dung mới vào README
 with open(readme, 'w') as f:
     f.write(new_content)
-
+# Thực hiện add, commit và push với commit_message_with_version
+git_add_commit_push(commit_message_with_version)
 print("[bold green]README updated with the latest version![/bold green]")
