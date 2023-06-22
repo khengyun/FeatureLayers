@@ -41,7 +41,7 @@ for i in range(len(version_parts) - 1, 0, -1):
 
 # Chuyển đổi lại thành chuỗi và gắn giá trị version mới
 new_version = '.'.join(map(str, version_parts))
-new_version_str = f'"{new_version}"'
+new_version_str = f'{new_version}'
 
 # Lưu giá trị version vào file __version__
 with fileinput.FileInput('./featurelayers/__version__.py', inplace=True) as file:
@@ -72,7 +72,7 @@ if '__version__' not in content:
     new_content = content + f'\n__version__ = "{new_version_str}"\n'
 else:
     # Tìm và thay thế phiên bản cũ trong README bằng phiên bản mới
-    new_content = re.sub(r'__version__ = .*', f'__version__ = "{new_version_str}"', content)
+    new_content = re.sub(r'__version__ = ".*"', f'__version__ = "{new_version_str}"', content)
 
 # Ghi nội dung mới vào README
 with open(readme, 'w') as f:

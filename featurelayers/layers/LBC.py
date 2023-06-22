@@ -12,6 +12,21 @@ from keras.engine.base_layer import Layer
 # Non-trainable filters initialized with distribution
 # of Bernoulli as in article and then it's non-trainable
 def new_weights_non_trainable(h, w, num_input, num_output, sparsity=0.5):
+    """
+       Create non-trainable weights with a Bernoulli distribution.
+
+       Args:
+           h: Height of the weight matrix.
+           w: Width of the weight matrix.
+           num_input: Number of input channels.
+           num_output: Number of output channels.
+           sparsity: Sparsity level of the weights.
+
+       Returns:
+           The non-trainable weight matrix.
+
+       """
+
     # Extract integer values from the tuples
     h_val, w_val = h
     num_input_val, num_output_val = num_input, num_output
@@ -40,7 +55,20 @@ def new_weights_non_trainable(h, w, num_input, num_output, sparsity=0.5):
 
 class LBC(Layer):
     def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,
-                 name="khengyun"):
+                 name="lbc_layer"):
+        """
+        Local Binary Convolution (LBC) layer.
+
+        Args:
+            filters: Number of filters (output channels) in the convolution.
+            kernel_size: Size of the convolution kernel.
+            stride: Stride of the convolution. Default is 1.
+            padding: Padding mode for the convolution. Default is 'same'.
+            activation: Activation function to use. Default is 'relu'.
+            dilation: Dilation rate for the convolution. Default is 1.
+            sparsity: Sparsity level of the non-trainable weights. Default is 0.9.
+            name: Name of the layer. Default is 'khengyun'.
+        """
         super(LBC, self).__init__()
         self.nOutputPlane = filters
         self.kW = kernel_size
@@ -49,6 +77,12 @@ class LBC(Layer):
                           dilation_rate=dilation, activation=activation, use_bias=False, name=name)
 
     def build(self, input_shape):
+        """
+        Build the layer.
+
+        Args:
+            input_shape: Shape of the input tensor.
+        """
         nInputPlane = input_shape[-1]
 
         with K.name_scope(self.LBC.name):
@@ -61,12 +95,36 @@ class LBC(Layer):
         super(LBC, self).build(input_shape)
 
     def call(self, x):
+        """
+        Perform the forward pass of the layer.
+
+        Args:
+            x: Input tensor.
+
+        Returns:
+            Output tensor.
+        """
         return self.LBC(x)
 
     def compute_output_shape(self, input_shape):
+        """
+        Compute the output shape of the layer.
+
+        Args:
+            input_shape: Shape of the input tensor.
+
+        Returns:
+            Output shape.
+        """
         return self.LBC.compute_output_shape(input_shape)
 
     def get_config(self):
+        """
+        Get the configuration of the layer.
+
+        Returns:
+            Configuration dictionary.
+        """
         config = super(LBC, self).get_config()
         config.update({
             'filters': self.nOutputPlane,
