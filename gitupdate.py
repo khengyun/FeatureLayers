@@ -41,7 +41,7 @@ for i in range(len(version_parts) - 1, 0, -1):
 
 # Chuyển đổi lại thành chuỗi và gắn giá trị version mới
 new_version = '.'.join(map(str, version_parts))
-new_version_str = f'{new_version}'
+new_version_str = f'"{new_version}"'
 
 # Lưu giá trị version vào file __version__
 with fileinput.FileInput('./featurelayers/__version__.py', inplace=True) as file:

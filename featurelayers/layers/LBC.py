@@ -67,7 +67,7 @@ class LBC(Layer):
             activation: Activation function to use. Default is 'relu'.
             dilation: Dilation rate for the convolution. Default is 1.
             sparsity: Sparsity level of the non-trainable weights. Default is 0.9.
-            name: Name of the layer. Default is 'khengyun'.
+            name: Name of the layer. Default is 'lbc_layer'.
         """
         super(LBC, self).__init__()
         self.nOutputPlane = filters
