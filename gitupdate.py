@@ -72,7 +72,7 @@ if '__version__' not in content:
     new_content = content + f'\n__version__ = "{new_version_str}"\n'
 else:
     # Tìm và thay thế phiên bản cũ trong README bằng phiên bản mới
-    new_content = re.sub(r'__version__ = ".*"', f'__version__ = "{new_version_str}"', content)
+    new_content = re.sub(r'__version__ = .*', f'__version__ = "{new_version_str}"', content)
 
 # Ghi nội dung mới vào README
 with open(readme, 'w') as f:
