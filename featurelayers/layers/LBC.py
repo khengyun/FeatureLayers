@@ -42,7 +42,7 @@ def new_weights_non_trainable(h, w, num_input, num_output, sparsity=0.5):
 
 
 class LBC(Layer):
-    def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,
+    def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,use_bias=False
                  name="khengyun"):
         """
               Local Binary Convolution (LBC) layer.

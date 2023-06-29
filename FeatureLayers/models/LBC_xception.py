@@ -141,7 +141,7 @@ def LBC_Xception(include_top=True, weights='imagenet',
         else:
             img_input = input_tensor
 
-    x = LBC(32, (3, 3), strides=(2, 2), use_bias=False, name='block1_conv1')(img_input)
+    x = LBC(32, (3, 3), stride=(2, 2), use_bias=False, name='block1_conv1')(img_input)
     x = BatchNormalization(name='block1_conv1_bn')(x)
     x = Activation('relu', name='block1_conv1_act')(x)
     x = LBC(64, (3, 3), use_bias=False, name='block1_conv2')(x)
@@ -161,7 +161,7 @@ def LBC_Xception(include_top=True, weights='imagenet',
     x = MaxPooling2D((3, 3), strides=(2, 2), padding='same', name='block2_pool')(x)
     x = layers.add([x, residual])
 
-    residual = LBC(256, (1, 1), strides=(2, 2),
+    residual = LBC(256, (1, 1), stride=(2, 2),
                       padding='same', use_bias=False)(x)
     residual = BatchNormalization()(residual)
 
@@ -205,7 +205,7 @@ def LBC_Xception(include_top=True, weights='imagenet',
 
         x = layers.add([x, residual])
 
-    residual = LBC(1024, (1, 1), strides=(2, 2),
+    residual = LBC(1024, (1, 1), stride=(2, 2),
                       padding='same', use_bias=False)(x)
     residual = BatchNormalization()(residual)
 
@@ -270,7 +270,7 @@ def preprocess_input(x):
 
 
 if __name__ == '__main__':
-    model = Xception(include_top=True,input_shape=(128,128,3),weights=None,classes=1)
+    model = LBC_Xception(include_top=True,input_shape=(128,128,3),weights=None,classes=1)
     model.summary()
 
     # img_path = 'elephant.jpg'
