@@ -3,11 +3,12 @@ import fileinput
 import subprocess
 from featurelayers.__version__ import __version__
 import git
-from rich import *
+
 from pathlib import Path
 from typing import List
-from rich.console import Console
+
 from rich.text import Text
+
 
 def check_or_update_version(update:bool=False)-> str: # Kiểm tra và cập nhật version
     if not update:
@@ -76,8 +77,8 @@ def check_git_status() -> List[str]:
         result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
         output = result.stdout.strip()
 
-        # Tạo đối tượng Console từ thư viện rich
-        console = Console()
+   
+        
 
         # Biến trung gian để lưu trữ các file tương ứng
         deleted_files = []
@@ -108,19 +109,19 @@ def check_git_status() -> List[str]:
 
         # In ra danh sách các file theo thứ tự: file bị xóa, file thêm mới, file bị thay đổi nội dung
         if  deleted_files != []:
-            console.print("[bold red]Deleted Files:[/bold red]")
+            print("[bold red]Deleted Files:[/bold red]")
             for file in deleted_files:
-                console.print(" -",file)
+                print(" -",file)
 
         if  added_files != []:
-            console.print("[bold green]Added Files:[/bold green]")
+            print("[bold green]Added Files:[/bold green]")
             for file in added_files:
-                console.print(" -",file)
+                print(" -",file)
 
         if modified_files != []:
-            console.print("[bold yellow]Modified Files:[/bold yellow]")
+            print("[bold yellow]Modified Files:[/bold yellow]")
             for file in modified_files:
-                console.print(" - ",file)
+                print(" - ",file)
 
         # Trả về danh sách các file đã thay đổi
         changed_files = deleted_files + added_files + modified_files
