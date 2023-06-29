@@ -6,7 +6,8 @@ import git
 from rich import *
 from pathlib import Path
 from typing import List
-
+from rich.console import Console
+from rich.text import Text
 
 def check_or_update_version(update:bool=False)-> str: # Kiểm tra và cập nhật version
     if not update:
@@ -74,19 +75,55 @@ def check_git_status() -> List[str]:
         result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
         output = result.stdout.strip()
 
-        # Phân tích kết quả để lấy danh sách các file đã thay đổi và không nằm trong gitnone
-        changed_files = []
+        # Tạo đối tượng Console từ thư viện rich
+        console = Console()
+
+        # Biến trung gian để lưu trữ các file tương ứng
+        deleted_files = []
+        added_files = []
+        modified_files = []
+
         lines = output.split('\n')
-    
+
         for line in lines:
             file_status = line[:2]
             file_path = line[3:]
-            if file_status != '??':
-                # File đã bị thay đổi và không nằm trong gitnone
-                changed_files.append(file_path)
+
+            # Tạo đối tượng Text để định dạng màu sắc của tên file
+            text = Text(file_path)
+
+            if file_status == 'D ':
+                # File bị xóa, định dạng màu đỏ
+              
+                deleted_files.append(text)
+            elif file_status != '??':
+                # File bị thay đổi nội dung bên trong, định dạng màu vàng
                 
-                
-        return changed_files
+                modified_files.append(text)
+            else:
+                # File mới được thêm, định dạng màu xanh
+               
+                added_files.append(text)
+
+        # In ra danh sách các file theo thứ tự: file bị xóa, file thêm mới, file bị thay đổi nội dung
+        if  deleted_files != []:
+            console.print("[bold red]Deleted Files:[/bold red]")
+            for file in deleted_files:
+                console.print(" -",file)
+
+        if  added_files != []:
+            console.print("[bold green]Added Files:[/bold green]")
+            for file in added_files:
+                console.print(" -",file)
+
+        if modified_files != []:
+            console.print("[bold yellow]Modified Files:[/bold yellow]")
+            for file in modified_files:
+                console.print(" - ",file)
+
+        # Trả về danh sách các file đã thay đổi
+        changed_files = deleted_files + added_files + modified_files
+        return [file.plain for file in changed_files]
     except subprocess.CalledProcessError as e:
         print(f"[bold red]Error: {e}[/bold red]")
         return []
@@ -122,8 +159,6 @@ def git_add_commit_push(message:dict={},changefile:list=[],all:bool=None): # Th�
 def check_before_push():
     version:str = check_or_update_version() # Kiểm tra version
     git_status:List[str] = check_git_status() # Kiểm tra trạng thái git
-    print("Git status: ")
-    print(git_status)
             # Nhập nội dung commit từ người dùng
     commit_message:str = input("Enter Commit Content: ")
     message:dict = {
@@ -132,8 +167,7 @@ def check_before_push():
     }
     git_add_commit_push(message=message,changefile=git_status,all=True)
     
-    
-    print(git_status)
+
     # git_add_commit_push()
     
 
