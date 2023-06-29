@@ -141,7 +141,7 @@ def LBC_Xception(include_top=True, weights='imagenet',
         else:
             img_input = input_tensor
 
-    x = LBC(32, (3, 3), stride=(2, 2), use_bias=False, name='block1_conv1')(img_input)
+    x = LBC(32, (3, 3), strides=(2, 2), use_bias=False, name='block1_conv1')(img_input)
     x = BatchNormalization(name='block1_conv1_bn')(x)
     x = Activation('relu', name='block1_conv1_act')(x)
     x = LBC(64, (3, 3), use_bias=False, name='block1_conv2')(x)

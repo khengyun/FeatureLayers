@@ -45,7 +45,7 @@ class LBC(Layer):
     def __init__(self, 
                  filters, 
                  kernel_size, 
-                 stride=1, 
+                 strides=1, 
                  padding='same', 
                  activation='relu', 
                  dilation=1, 
@@ -58,7 +58,7 @@ class LBC(Layer):
                Args:
                    - filters: Number of filters (output channels) in the convolution.
                    - kernel_size: Size of the convolution kernel.
-                   - stride: Stride of the convolution. Default is 1.
+                   - strides: strides of the convolution. Default is 1.
                    - padding: Padding mode for the convolution. Default is 'same'.
                    - activation: Activation function to use. Default is 'relu'.
                    - dilation: Dilation rate for the convolution. Default is 1.
@@ -73,7 +73,7 @@ class LBC(Layer):
         self.nOutputPlane = filters
         self.kW = kernel_size
         self.sparsity = sparsity
-        self.LBC = Conv2D(filters, kernel_size=kernel_size, strides=stride, padding=padding,
+        self.LBC = Conv2D(filters, kernel_size=kernel_size, strides=strides, padding=padding,
                           dilation_rate=dilation, activation=activation, use_bias=use_bias, name=name)
 
     def build(self, input_shape):
@@ -99,7 +99,7 @@ class LBC(Layer):
         config.update({
             'filters': self.nOutputPlane,
             'kernel_size': self.kW,
-            'stride': self.LBC.strides[0],
+            'strides': self.LBC.stridess[0],
             'padding': self.LBC.padding,
             'activation': self.LBC.activation,
             'dilation': self.LBC.dilation_rate[0],
