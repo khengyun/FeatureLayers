@@ -42,7 +42,7 @@ def new_weights_non_trainable(h, w, num_input, num_output, sparsity=0.5):
 
 
 class LBC(Layer):
-    def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,use_bias=False
+    def __init__(self, filters, kernel_size, stride=1, padding='same', activation='relu', dilation=1, sparsity=0.9,use_bias=False,
                  name="khengyun"):
         """
               Local Binary Convolution (LBC) layer.
@@ -66,7 +66,7 @@ class LBC(Layer):
         self.kW = kernel_size
         self.sparsity = sparsity
         self.LBC = Conv2D(filters, kernel_size=kernel_size, strides=stride, padding=padding,
-                          dilation_rate=dilation, activation=activation, use_bias=False, name=name)
+                          dilation_rate=dilation, activation=activation, use_bias=use_bias, name=name)
 
     def build(self, input_shape):
         nInputPlane = input_shape[-1]
