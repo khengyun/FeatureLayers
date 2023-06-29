@@ -7,6 +7,7 @@ pip install featurelayers
 
 
 ## Usage
+### LBC Layers
 ```python
 import numpy as np
 from keras.models import Sequential

@@ -22,6 +22,8 @@ def unet(pretrained_weights=None, input_size=(128, 128, 3)):
     return model
 
 
+
+
 model = unet()
 from keras.utils.vis_utils import plot_model
 
