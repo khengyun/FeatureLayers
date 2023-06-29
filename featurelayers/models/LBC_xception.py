@@ -231,9 +231,9 @@ def LBC_Xception(include_top=True, weights='imagenet',
         x = GlobalAveragePooling2D(name='avg_pool')(x)
         x = Dense(1000, activation='relu')(x)
         x = Dense(500, activation='relu')(x)
-        x = Dense(256, activation='relu', name='predictions')(x)
-        x = Dense(100, activation='relu', name='predictions')(x)
-        x = Dense(50, activation='relu', name='predictions')(x)
+        x = Dense(256, activation='relu')(x)
+        x = Dense(100, activation='relu')(x)
+        x = Dense(50, activation='relu')(x)
         
         x = Dense(classes, activation='softmax', name='predictions')(x)
     else:
