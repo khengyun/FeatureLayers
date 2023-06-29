@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List
 
 from rich.text import Text
-
+from rich import *
 
 def check_or_update_version(update:bool=False)-> str: # Kiểm tra và cập nhật version
     if not update:
@@ -38,10 +38,19 @@ def check_or_update_version(update:bool=False)-> str: # Kiểm tra và cập nh�
         # Đọc giá trị version từ module featurelayers
         # Lưu giá trị version vào file __version__
         print("Updating version local...")
-        with fileinput.FileInput('./featurelayers/__version__.py', inplace=True) as file:
+        new_line = f'__version__ = {new_version_str}'
+        file_path = './featurelayers/__version__.py'
+
+        # Đọc nội dung của tệp và thay thế giá trị __version__
+        new_content = ''
+        with fileinput.FileInput(file_path, inplace=True) as file:
             for line in file:
-                line = re.sub(r'__version__ = .*', f'__version__ = {new_version_str}', line.rstrip())
-                print(line, end='\n')
+                line = re.sub(r'__version__ = .*', new_line, line.rstrip())
+                new_content += line + '\n'
+
+        # Ghi nội dung mới vào tệp
+        with open(file_path, 'w') as file:
+            file.write(new_content)
 
         # Cập nhật nội dung trong README với phiên bản mới nhất
         repo = git.Repo()
