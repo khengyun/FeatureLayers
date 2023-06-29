@@ -161,7 +161,7 @@ def LBC_Xception(include_top=True, weights='imagenet',
     x = MaxPooling2D((3, 3), strides=(2, 2), padding='same', name='block2_pool')(x)
     x = layers.add([x, residual])
 
-    residual = LBC(256, (1, 1), stride=(2, 2),
+    residual = LBC(256, (1, 1), strides=(2, 2),
                       padding='same', use_bias=False)(x)
     residual = BatchNormalization()(residual)
 
@@ -205,7 +205,7 @@ def LBC_Xception(include_top=True, weights='imagenet',
 
         x = layers.add([x, residual])
 
-    residual = LBC(1024, (1, 1), stride=(2, 2),
+    residual = LBC(1024, (1, 1), strides=(2, 2),
                       padding='same', use_bias=False)(x)
     residual = BatchNormalization()(residual)
 
@@ -270,7 +270,7 @@ def preprocess_input(x):
 
 
 if __name__ == '__main__':
-    model = LBC_Xception(include_top=True,input_shape=(128,128,3),weights=None,classes=1)
+    model = LBC_Xception(include_top=True,input_shape=(128,128,3),weights=None,classes=1000)
     model.summary()
 
     # img_path = 'elephant.jpg'
