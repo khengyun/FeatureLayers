@@ -99,7 +99,7 @@ class LBC(Layer):
         config.update({
             'filters': self.nOutputPlane,
             'kernel_size': self.kW,
-            'strides': self.LBC.stridess[0],
+            'strides': self.LBC.strides[0],
             'padding': self.LBC.padding,
             'activation': self.LBC.activation,
             'dilation': self.LBC.dilation_rate[0],
