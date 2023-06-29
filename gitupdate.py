@@ -18,6 +18,7 @@ def check_or_update_version(update:bool=False)-> str: # Kiểm tra và cập nh�
     
     else: # Cập nhật version
         # Tách version thành các phần tử số
+        version = __version__
         version_parts = list(map(int, version.split('.')))
 
         # Tăng giá trị cuối cùng lên 1
@@ -157,7 +158,7 @@ def git_add_commit_push(message:dict={},changefile:list=[],all:bool=None): # Th�
 
 
 def check_before_push():
-    version:str = check_or_update_version() # Kiểm tra version
+    version:str = check_or_update_version(update=True) # Kiểm tra version
     git_status:List[str] = check_git_status() # Kiểm tra trạng thái git
             # Nhập nội dung commit từ người dùng
     commit_message:str = input("Enter Commit Content: ")
