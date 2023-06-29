@@ -33,7 +33,7 @@ def check_or_update_version(update:bool=False)-> str: # Kiểm tra và cập nh�
         # Chuyển đổi lại thành chuỗi và gắn giá trị version mới
         new_version = '.'.join(map(str, version_parts))
         new_version_str = f'"{new_version}"'
-        print(f"New version: {new_version}")
+        print(f"New version: {new_version_str}")
         # Đọc giá trị version từ module featurelayers
         # Lưu giá trị version vào file __version__
         print("Updating version local...")
