@@ -39,6 +39,7 @@ def check_or_update_version(update:bool=False)-> str: # Kiểm tra và cập nh�
         print("Updating version local...")
         with fileinput.FileInput('./featurelayers/__version__.py', inplace=True) as file:
             for line in file:
+                print(new_version_str)
                 line = re.sub(r'__version__ = .*', f'__version__ = {new_version_str}', line.rstrip())
                 print(line)
 
