@@ -28,6 +28,7 @@ setup(
         'scikit-learn',
         'graphviz',
         'pydot',
+        'keras_applications',
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",
